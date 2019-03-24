@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<toolbox>
+    <tool>
+        <key>UrlUtil</key>
+        <class>com.nali.common.util.UrlUtil</class>
+        <scope>application</scope>
+    </tool>
+</toolbox>

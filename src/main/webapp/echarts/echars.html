@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script src="../js/echarts.js"></script>
+    <script src="../js/echarts-gl.js"></script>
+    <script src="../js/theme/vintage.js"></script>
+</head>
+<body>
+<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+<div id="bar" style="width: 600px;height:400px;"></div>
+
+<div id="mutilBar" style="width: 600px;height:400px;"></div>
+
+<div id="pie" style="width: 600px;height:400px;"></div>
+
+<div id="line" style="width: 600px;height:400px;"></div>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+
+    option = {
+        legend: {},
+        tooltip: {},
+        dataset: {
+            // 这里指定了维度名的顺序，从而可以利用默认的维度到坐标轴的映射。
+            // 如果不指定 dimensions，也可以通过指定 series.encode 完成映射，参见后文。
+            dimensions: ['product', '2015', '2016', '2017'],
+            source: [
+                {product: 'Matcha Latte', '2015': 43.3, '2016': 85.8, '2017': 93.7},
+                {product: 'Milk Tea', '2015': 83.1, '2016': 73.4, '2017': 55.1},
+                {product: 'Cheese Cocoa', '2015': 86.4, '2016': 65.2, '2017': 82.5},
+                {product: 'Walnut Brownie', '2015': 72.4, '2016': 53.9, '2017': 39.1}
+            ]
+        },
+        xAxis: {type: 'category'},
+        yAxis: {},
+        series: [
+            {type: 'bar'},
+            {type: 'bar'},
+            {type: 'bar'}
+        ]
+    };
+
+    echarts.init(document.getElementById('mutilBar')).setOption({
+        legend: {},
+        tooltip: {},
+        dataset: {
+            // 提供一份数据。
+            source: [
+                ['product', '2015', '2016', '2017'],
+                ['苹果', 43.3, 85.8, 93.7],
+                ['肉', 83.1, 73.4, 55.1],
+                ['咖啡', 86.4, 65.2, 82.5],
+                ['糖', 72.4, 53.9, 39.1]
+            ]
+        },
+        // 声明一个 X 轴，类目轴（category）。默认情况下，类目轴对应到 dataset 第一列。
+        xAxis: {type: 'category'},
+        // 声明一个 Y 轴，数值轴。
+        yAxis: {},
+        // 声明多个 bar 系列，默认情况下，每个系列会自动对应到 dataset 的每一列。
+        series: [
+            {type: 'bar'},
+            {type: 'bar'},
+            {type: 'bar'}
+        ]
+    });
+
+
+    var myChart = echarts.init(document.getElementById('bar'),'light');
+        myChart.showLoading();
+        myChart.hideLoading();
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+            text: '页面访问趋势'
+        },
+        tooltip: {},
+        legend: {
+            data: ['访问量']
+        },
+        xAxis: {
+            data: ["2018-12-01", "2018-12-02", "2018-12-03", "2018-12-04", "2018-12-05", "2018-12-06"]
+        },
+        yAxis: {},
+        series: [{
+            name: '访问量',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }]
+    };
+
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+
+    // 绘制图表。
+    echarts.init(document.getElementById('pie'),'dark').setOption({
+        series: {
+            name: '访问来源',
+            type: 'pie',
+            radius: '55%',
+            roseType: 'angle',
+            data:[
+                {
+                 value:235,
+                 name:'视频广告',
+                 itemStyle: {
+                    color: '#c23531'
+                 }
+                },
+                {value:274, name:'联盟广告'},
+                {value:310, name:'邮件营销'},
+                {value:335, name:'直接访问'},
+                {value:400, name:'搜索引擎'}
+            ]
+        },
+        backgroundColor: '#2c343c',
+        textStyle: {
+            color: 'rgba(255, 255, 255, 0.3)'
+        },
+        lineStyle: {
+            color: 'rgba(255, 255, 255, 0.3)'
+        },
+        visualMap: {
+            // 不显示 visualMap 组件，只用于明暗度的映射
+            show: false,
+            // 映射的最小值为 80
+            min: 80,
+            // 映射的最大值为 600
+            max: 600,
+            inRange: {
+                // 明暗度的范围是 0 到 1
+                colorLightness: [0, 1]
+            }
+        }
+    });
+
+    echarts.init(document.getElementById('line')).setOption({
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            data: [820, 932, 901, 934, 1290, 1330, 1320],
+            type: 'line',
+            areaStyle: {}
+        }]
+    });
+
+</script>
+</body>
+</html>

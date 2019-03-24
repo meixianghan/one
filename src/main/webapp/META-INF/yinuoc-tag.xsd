@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<xsd:schema xmlns="http://www.yinuoc.com/schema"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://www.yinuoc.com/schema"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified" version="1.0">
+
+    <xsd:element name="taglib">
+
+        <xsd:annotation>
+            <xsd:documentation>
+                根标签
+            </xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType>
+            <xsd:sequence>
+
+                <xsd:element name="description" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[文档描述]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+
+                <xsd:element name="display-name" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[文档描述]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+
+
+                <xsd:element name="tlib-version" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[文档描述]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+
+                <xsd:element name="uri" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[文档描述]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+
+                <xsd:element name="short-name" type="xsd:string">
+                    <xsd:annotation>
+                        <xsd:documentation><![CDATA[文档描述]]></xsd:documentation>
+                    </xsd:annotation>
+                </xsd:element>
+
+                <xsd:element name="tag">
+                    <xsd:complexType>
+                        <xsd:sequence>
+                            <xsd:element name="description" type="xsd:string">
+                                <xsd:annotation>
+                                    <xsd:documentation><![CDATA[文档描述]]></xsd:documentation>
+                                </xsd:annotation>
+                            </xsd:element>
+                            <xsd:element name="name" type="xsd:string"></xsd:element>
+                            <xsd:element name="tag-class" type="xsd:string"></xsd:element>
+                            <xsd:element name="body-content" type="xsd:string"></xsd:element>
+                        </xsd:sequence>
+                    </xsd:complexType>
+                </xsd:element>
+            </xsd:sequence>
+            <xsd:attribute name="version" type="xsd:string"></xsd:attribute>
+        </xsd:complexType>
+
+    </xsd:element>
+
+
+</xsd:schema>

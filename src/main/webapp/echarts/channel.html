@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../js/echarts.js"></script>
+    <script src="../js/echarts-gl.js"></script>
+    <script src="../js/theme/vintage.js"></script>
+</head>
+<body>
+    <div id="bar" style="width: 1000px;height:400px;"></div>
+
+<script>
+    option = {
+        title: {
+            text: '渠道有效用户数'
+        },
+        tooltip : {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'cross',
+                label: {
+                    backgroundColor: '#6a7985'
+                }
+            }
+        },
+        legend: {
+            data:['内部渠道','联盟广告','新浪合作','百度合作','搜索引擎']
+        },
+        toolbox: {
+            feature: {
+                saveAsImage: {}
+            }
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis : [
+            {
+                type : 'category',
+                boundaryGap : false,
+                data : ['2018-01','2018-02','2018-03','2018-04','2018-05','2018-06','2018-07','2018-08','2018-09','2018-10','2018-11','2018-012']
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'内部渠道',
+                type:'line',
+                stack: '总量',
+                areaStyle: {},
+                data:[120, 132, 101, 134, 90, 230, 210 ,250,352,129,231,258]
+            },
+            {
+                name:'联盟广告',
+                type:'line',
+                stack: '总量',
+                areaStyle: {},
+                data:[220, 182, 191, 234, 290, 330, 310,90, 230, 210 ,250,352]
+            },
+            {
+                name:'新浪合作',
+                type:'line',
+                stack: '总量',
+                areaStyle: {},
+                data:[150, 232, 201, 154, 190, 330, 410,234, 290, 330, 310,90,]
+            },
+            {
+                name:'百度合作',
+                type:'line',
+                stack: '总量',
+                areaStyle: {normal: {}},
+                data:[320, 332, 301, 334, 390, 330, 320,232, 201, 154, 190, 330]
+            },
+            {
+                name:'搜索引擎',
+                type:'line',
+                stack: '总量',
+                label: {
+                    normal: {
+                        show: true,
+                        position: 'top'
+                    }
+                },
+                areaStyle: {normal: {}},
+                data:[820, 932, 901, 934, 1290, 1330, 1320,324,786,989,1024,432]
+            }
+        ]
+    };
+
+    echarts.init(document.getElementById('bar')).setOption(option);
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<html>
+<head>
+    <title>Spring & Velocity</title>
+</head>
+<body>
+<div>
+    #parse("/WEB-INF/templates/vm/header.vm")
+</div>
+
+
+<div>
+
+    $screen_content
+
+</div>
+
+<div>
+    #parse("/WEB-INF/templates/vm/footer.vm")
+</div>
+</body>
+</html>

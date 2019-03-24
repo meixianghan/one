@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.mrerror.one.dao.BlogDao">
+
+    <!-- 关联查询 -->
+    <resultMap id="blogResult" type="Blog">
+        <association property="author" column="blog_author_id" javaType="Author" select="selectAuthor"/>
+    </resultMap>
+
+    <select id="selectBlog" resultMap="blogResult" parameterType="Blog">
+        select * from blog where blog_id = #{blog_id}
+    </select>
+
+    <select id="selectAuthor" resultType="Author">
+        select * from author where author_id = #{author_id}
+    </select>
+
+    <!-- 连表查询返回集合 -->
+    <resultMap id="blogAuthorResult" type="Blog">
+        <id property="blog_id" column="blog_id" />
+        <result property="blog_title" column="blog_title"/>
+        <association property="author" javaType="Author">
+            <id property="author_id" column="author_id"/>
+            <result property="author_username" column="author_username"/>
+            <result property="author_password" column="author_password"/>
+            <result property="author_email" column="author_email"/>
+            <result property="author_bio" column="author_bio"/>
+        </association>
+    </resultMap>
+    
+    <select id="selectBlogAuthor" resultMap="blogAuthorResult">
+        select
+        blog_id,
+        blog_title,
+        blog_author_id,
+        author_id,
+        author_username,
+        author_password,
+        author_email,
+        author_bio
+        from blog b left outer join author a on b.blog_author_id = a.author_id
+        where b.blog_author_id = #{blog_id}
+    </select>
+
+    <!-- 一个博客有两个作者 -->
+    <resultMap id="blogDoubleAuthorResult" type="Blog">
+        <id property="blog_id" column="blog_id" />
+        <result property="blog_title" column="blog_title"/>
+        <association property="author"   resultMap="authorResult" />
+        <association property="coAuthor" resultMap="authorResult"
+                     columnPrefix="co_" />
+    </resultMap>
+    <!-- 作者 -->
+    <resultMap id="authorResult" type="Author">
+        <id property="author_id" column="author_id"/>
+        <result property="author_username" column="author_username"/>
+        <result property="author_password" column="author_password"/>
+        <result property="author_email" column="author_email"/>
+        <result property="author_bio" column="author_bio"/>
+    </resultMap>
+
+    <select id="selectBlogDoubleAuthor" resultMap="blogDoubleAuthorResult">
+        select
+        blog_id,
+        blog_title,
+        a.author_id,
+        a.author_username,
+        a.author_password,
+        a.author_email,
+        a.author_bio,
+        ca.author_id           as co_author_id,
+        ca.author_username     as co_author_username,
+        ca.author_password     as co_author_password,
+        ca.author_email        as co_author_email,
+        ca.author_bio          as co_author_bio
+        from blog b
+        left outer join author a on b.blog_author_id = a.author_id
+        left outer join author ca on b.blog_co_author_id = ca.author_id
+        where b.blog_author_id = #{blog_id}
+    </select>
+
+    <!-- 关联集合查询 -->
+    <resultMap id="blogPostResult" type="Blog">
+        <id property="blog_id" column="blog_id"/>
+        <collection property="posts" javaType="ArrayList" fetchType="lazy" column="blog_id" ofType="Post" select="selectPostsForBlog"/>
+    </resultMap>
+
+    <select id="selectBlogPostCollection" resultMap="blogPostResult">
+        select * from blog where blog_id = #{blog_id}
+    </select>
+
+    <select id="selectPostsForBlog" resultType="Post">
+        select * from post where blog_id = #{blog_id}
+    </select>
+
+    <!-- 连接查询 -->
+    <resultMap id="blogCollectionResult" type="Blog">
+        <id property="blog_id" column="blog_id" />
+        <result property="blog_title" column="blog_title"/>
+        <collection property="posts" ofType="Post">
+            <id property="id" column="post_id"/>
+            <result property="subject" column="post_subject"/>
+            <result property="body" column="post_body"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectBlogPosts" resultMap="blogCollectionResult">
+        select
+        b.blog_id,
+        b.blog_title,
+        b.blog_author_id,
+        p.id as post_id,
+        p.subject as post_subject,
+        p.body as post_body
+        from blog b
+        left outer join post p on b.blog_id = p.blog_id
+        where b.blog_id = #{blog_id}
+    </select>
+
+</mapper>
