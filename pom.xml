@@ -19,7 +19,7 @@
         <!--themeleaf 版本号 -->
         <thymeleaf.version>2.1.2.RELEASE</thymeleaf.version>
         <!-- spring版本号 -->
-        <spring.version>4.3.21.RELEASE</spring.version>
+        <spring.version>5.2.22.RELEASE</spring.version>
         <!-- mybatis版本号 -->
         <mybatis.version>3.3.1</mybatis.version>
         <!-- log4j日志文件管理包版本 -->
